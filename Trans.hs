@@ -2,5 +2,7 @@ module Trans(
   transmit
 ) where
 
-transmit :: String -> String
+import GHC.Word
+
+transmit :: Word8 -> Word8
 transmit source = source
