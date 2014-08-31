@@ -1,5 +1,5 @@
-module Trans(
-  transmit
+module Trans
+( transmit
 ) where
 
 import GHC.Word
