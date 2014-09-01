@@ -1,0 +1,3 @@
+This program introduces errors into a stream, simulating a digital transmission
+line with no error detection or correction. Pipe whatever you want into it and
+see what comes out.
