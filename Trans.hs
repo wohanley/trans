@@ -7,10 +7,10 @@ import System.Random
 
 transmit :: StdGen -> Word8 -> Word8
 transmit gen source = 
-    let (rand, newGen) = random gen
+    let (rand, newGen) = random gen :: (Float, StdGen)
     in possibly applyInversion rand 0.1 source
 
-possibly :: (a -> a) -> Float -> Float -> a -> a
+possibly :: (Floating f, Ord f) => (a -> a) -> f -> f -> a -> a
 possibly f value threshold x = 
     if value < threshold then f x else x
 
