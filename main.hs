@@ -5,12 +5,13 @@ import GHC.Word
 
 main = do
     stream <- BS.getContents
-    mapM_ transform (unpack stream)
+    words <- sequence ((Prelude.map transform) . unpack $ stream)
+    BS.putStr . pack $ words
 
-transform :: Word8 -> IO ()
+transform :: Word8 -> IO Word8
 transform source = do
     loadedTransmit <- genToTransmit
-    print . loadedTransmit $ source
+    return (loadedTransmit source)
 
 genToTransmit :: IO (Word8 -> Word8)
 genToTransmit = do
