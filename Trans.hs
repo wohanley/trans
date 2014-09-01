@@ -42,7 +42,7 @@ invertAt :: Word8 -> [Word8] -> Int -> Word8
 invertAt n powersOf2 powerIndex = invert n (powersOf2 !! powerIndex)
 
 powersOf2 :: Word8 -> [Word8]
-powersOf2 n = map (pow 2) [1..n]
+powersOf2 n = [ pow 2 x | x <- [1..n] ]
 
 pow :: Word8 -> Word8 -> Word8
 pow n 0 = 1
