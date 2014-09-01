@@ -5,11 +5,20 @@ module Trans
 import GHC.Word
 import System.Random
 
+errors :: (Floating f) => [((Word8 -> Word8), f)]
+errors =    [ (applyInversion, 0.01)
+            , (applyFlipping, 0.1)
+            ]
+
+applyError :: (Word8, StdGen) -> ((Word8 -> Word8), Float) -> (Word8, StdGen)
+applyError (acc, gen) (error, probability) = 
+    let (rand, gen') = random gen :: (Float, StdGen)
+    in (possibly error rand probability acc, gen')
+
 transmit :: StdGen -> Word8 -> Word8
 transmit gen source = 
-    let (rand, gen') = random gen :: (Float, StdGen)
-        (rand', gen'') = random gen' :: (Float, StdGen)
-    in possibly applyFlipping rand 0.1 (possibly applyInversion rand' 0.1 source)
+    let (result, _) = foldl applyError (source, gen) errors
+    in result
 
 possibly :: (Floating f, Ord f) => (a -> a) -> f -> f -> a -> a
 possibly f value threshold x = 
