@@ -19,9 +19,9 @@ applyError :: (StdGen, Word8) -> ((StdGen, Word8) -> (StdGen, Word8))
     -> (StdGen, Word8)
 applyError (gen, acc) (error) = error (gen, acc)
 
-possibly :: (Floating f, Ord f) => (a -> a) -> f -> f -> a -> a
-possibly f value threshold x = 
-    if value < threshold then f x else x
+possibly :: (Floating f, Ord f) => (a -> a) -> f -> f -> (a -> a)
+possibly f value threshold = 
+    if value < threshold then f else id
 
 applyInversion :: Float -> (StdGen, Word8) -> (StdGen, Word8)
 applyInversion probability (gen, n) =
