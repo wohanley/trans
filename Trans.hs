@@ -5,9 +5,9 @@ module Trans
 import GHC.Word
 import System.Random
 
-errors :: (Floating f) => [(StdGen, Word8) -> (StdGen, Word8)]
+errors :: [(StdGen, Word8) -> (StdGen, Word8)]
 errors =    [ applyInversion 0.01
-            , applyFlipping 0.001
+            , applyFlipping 0.01
             ]
 
 transmit :: StdGen -> Word8 -> Word8
