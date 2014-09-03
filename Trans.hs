@@ -19,7 +19,7 @@ applyError :: (StdGen, Word8) -> ((StdGen, Word8) -> (StdGen, Word8))
     -> (StdGen, Word8)
 applyError (gen, acc) (error) = error (gen, acc)
 
-possibly :: (Floating f, Ord f) => (a -> a) -> f -> f -> (a -> a)
+possibly :: (Ord o) => (a -> a) -> o -> o -> (a -> a)
 possibly f value threshold = 
     if value < threshold then f else id
 
